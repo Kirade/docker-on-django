@@ -1,3 +1,3 @@
-SECRET_KEY = 'cc)np74f8$-5+55p7xwc0thqh5p6ynsxw@rtk2ss7=we63b6a3'
-DEBUG = 1
-ALLOWED_HOSTS = localhost .ap-northeast-2.compute.amazonaws.com
+SECRET_KEY=cc)np74f8$-5+55p7xwc0thqh5p6ynsxw@rtk2ss7=we63b6a3
+DEBUG=1
+DJANGO_ALLOWED_HOSTS=localhost .ap-northeast-2.compute.amazonaws.com
