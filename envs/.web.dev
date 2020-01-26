@@ -1,3 +1,12 @@
 SECRET_KEY=cc)np74f8$-5+55p7xwc0thqh5p6ynsxw@rtk2ss7=we63b6a3
 DEBUG=1
 DJANGO_ALLOWED_HOSTS=localhost .ap-northeast-2.compute.amazonaws.com
+
+# DATABASE
+DATABASE=postgres
+SQL_ENGINE=django.db.backends.postgresql
+SQL_DATABASE=hello_django_dev
+SQL_USER=hello_django
+SQL_PASSWORD=hello_django
+SQL_HOST=db
+SQL_PORT=5432

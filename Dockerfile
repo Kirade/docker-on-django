@@ -6,11 +6,18 @@ ENV PYTHONUNBUFFERED 1
 
 WORKDIR /usr/src/app
 
+# Install psycopg2 dependencies
+RUN apk update && apk add postgresql-dev gcc python3-dev musl-dev
+
 # Requirements ( Layer Caching )
 RUN pip install --upgrade pip
 COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
+# Copy entrypoint.sh
+COPY ./entrypoint.sh /usr/src/app/entrypoint.sh
+
 COPY . /usr/src/app/
 
-CMD /bin/sh
+# Run entrypoint.sh
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
