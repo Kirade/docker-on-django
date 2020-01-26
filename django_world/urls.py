@@ -22,7 +22,7 @@ from upload.views import image_upload
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", image_upload, name="upload"),
+    path('', image_upload, name='upload'),
 ]
 
 if settings.DEBUG:
