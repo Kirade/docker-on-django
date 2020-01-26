@@ -1,33 +1,16 @@
-FROM        ubuntu:18.04
+FROM python:3.7-alpine
 MAINTAINER  jay.jaeyoung@gmail.com
 
-# Package Update
-RUN apt -y update
-RUN apt -y dist-upgrade
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# Install Git, Vim, Pip
-RUN apt -y install git vim python-pip
+WORKDIR /usr/src/app
 
-# Pyenv
-RUN apt -y install make build-essential libssl-dev zlib1g-dev libbz2-dev \
-libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev libncursesw5-dev \
-xz-utils tk-dev
-RUN curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-ENV PATH /root/.pyenv/bin:$PATH
-RUN echo 'export PATH="/root/.pyenv/bin:$PATH"' >> ~/.zshrc
-RUN echo 'eval "$(pyenv init -)"' >> ~/.zshrc
-RUN echo 'eval "$(pyenv virtualenv-init -)"' >> ~/.zshrc
+# Requirements ( Layer Caching )
+RUN pip install --upgrade pip
+COPY ./requirements.txt /usr/src/app/requirements.txt
+RUN pip install -r requirements.txt
 
-# Zsh
-RUN apt-get install -y zsh
-RUN wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh || true
-RUN chsh -s /usr/bin/zsh
+COPY . /usr/src/app/
 
-# Virtual Environment
-RUN pyenv install 3.7.4
-RUN pyenv virtualenv 3.7.4 django_world
-
-# Gunicorn
-RUN pip install gunicorn
-
-
+CMD /bin/sh
